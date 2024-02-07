@@ -4,13 +4,12 @@ configurations {"Debug", "Release"}
 startproject "GLFW"
 
 project "GLFW"
+location "GLFW"
 kind "StaticLib"
 language "C"
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-
-targetdir("bin/" .. outputdir .. "/%{prj.name}")
-objdir("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir("bin/%{cfg.buildcfg}")
+objdir("bin-int/%{cfg.buildcfg}")
 
 files {
     "include/GLFW/glfw3.h",
@@ -25,7 +24,6 @@ files {
 }
 
 filter "system:windows" --until next filter or project
-buildoptions {"-std=c11", "-lgdi32"}
 staticruntime "On"
 systemversion "latest"
 
@@ -43,5 +41,6 @@ defines {
     "_GLFW_WIN32"
 }
 
-filter {"system:windows", "configurations:Release"}
+filter "configurations:Release"
+optimize "On"
 buildoptions "/MT"
