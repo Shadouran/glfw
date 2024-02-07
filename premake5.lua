@@ -1,4 +1,8 @@
 workspace "GLFW"
+architecture "x64"
+configurations {"Debug", "Release"}
+startproject "GLFW"
+
 project "GLFW"
 kind "StaticLib"
 language "C"
